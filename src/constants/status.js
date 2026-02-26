@@ -3,10 +3,15 @@
 // Disse statusene brukes for å spore fremdriften til en jobbsøknad og gi brukeren informasjon om hvor de står i søknadsprosessen.
 
 export const STATUS = {
-    SENT : 'SENT',
-    REJECTED : 'REJECTED',
-    OFFER : 'OFFER',
-    GHOSTED : 'GHOSTED',
-    INTERVIEW : 'INTERVIEW',
-    UNDER_REVIEW : 'UNDER_REVIEW',
+  SENT: "SENT",
+  INTERVIEW: "INTERVIEW",
+  REJECTED: "REJECTED",
+  OFFER: "OFFER"
+}
+
+export const STATUS_LABELS = {
+  SENT: "Sendt",
+  INTERVIEW: "Intervju",
+  REJECTED: "Avslag",
+  OFFER: "Tilbud"
 }

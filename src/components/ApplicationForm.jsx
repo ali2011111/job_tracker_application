@@ -1,77 +1,74 @@
 import { useState } from 'react'
-import { STATUS } from '../constants/status'
+import { STATUS, STATUS_LABELS } from '../constants/status'
 
 function ApplicationForm({ applications, setApplications }) {
 
-    // Tilstanden for hvert av feltene i søknadsskjemaet. Disse tilstandene brukes for å holde styr 
-    // på verdiene som brukeren skriver inn i skjemaet, og for å oppdatere disse verdiene når 
-    // brukeren gjør endringer.
-    const [company, setCompany] = useState('')
-    const [position, setPosition] = useState('')
-    const [status, setStatus] = useState(STATUS.SENT)
-    const [deadline, setDeadline] = useState('')
+  const [company, setCompany] = useState('')
+  const [position, setPosition] = useState('')
+  const [status, setStatus] = useState(STATUS.SENT)
+  const [deadline, setDeadline] = useState('')
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
+  const handleSubmit = (e) => {
+    e.preventDefault()
 
-        if (!company || !position) {
-            alert('Please fill in all required fields')
-            return
-        }
-
-        const newApplication = {
-            id: Date.now(),
-            company,
-            position,
-            status,
-            deadline
-        }
-
-        setApplications([...applications, newApplication])
-
-        // Reset form fields after submission
-        setCompany('')
-        setPosition('')
-        setStatus(STATUS.SENT)
-        setDeadline('')
+    if (!company || !position) {
+      alert('Vennligst fyll inn firma og stilling')
+      return
     }
 
-     return (
-    <form onSubmit={handleSubmit} style={{ marginTop: "2rem" }}>
-      <h2>Add Application</h2>
+    const newApplication = {
+      id: Date.now(),
+      company,
+      position,
+      status,
+      deadline
+    }
 
-      <div>
+    setApplications([...applications, newApplication])
+
+    setCompany('')
+    setPosition('')
+    setStatus(STATUS.SENT)
+    setDeadline('')
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="app-form">
+
+      <div className="form-group">
+        <label>Firma</label>
         <input
           type="text"
-          placeholder="Company"
           value={company}
           onChange={(e) => setCompany(e.target.value)}
         />
       </div>
 
-      <div>
+      <div className="form-group">
+        <label>Stilling</label>
         <input
           type="text"
-          placeholder="Position"
           value={position}
           onChange={(e) => setPosition(e.target.value)}
         />
       </div>
 
-      <div>
+      <div className="form-group">
+        <label>Status</label>
         <select
           value={status}
           onChange={(e) => setStatus(e.target.value)}
         >
-          {Object.values(STATUS).map((statusOption) => (
-            <option key={statusOption} value={statusOption}>
-              {statusOption}
+          {Object.values(STATUS).map((statusKey) => (
+            <option key={statusKey} value={statusKey}>
+              {STATUS_LABELS[statusKey]}
             </option>
           ))}
         </select>
       </div>
 
-      <div>
+      <div className="form-group">
+        <label>Søknadsfrist</label>
         <input
           type="date"
           value={deadline}
@@ -79,7 +76,10 @@ function ApplicationForm({ applications, setApplications }) {
         />
       </div>
 
-      <button type="submit">Add</button>
+      <div className="form-group">
+        <button type="submit">Legg til</button>
+      </div>
+
     </form>
   )
 }
