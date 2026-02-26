@@ -30,29 +30,18 @@ function ApplicationList({ applications, setApplications }) {
       {applications.map((app) => (
         <div
           key={app.id}
-          style={{
-            border: "1px solid black",
-            padding: "1rem",
-            marginBottom: "1rem"
-          }}
+          className="card"
         >
           <h3>{app.company}</h3>
           <p>Position: {app.position}</p>
 
           <div>
             <label>Status: </label>
-            <select
-              value={app.status}
-              onChange={(e) =>
-                handleStatusChange(app.id, e.target.value)
-              }
-            >
-              {Object.values(STATUS).map(statusOption => (
-                <option key={statusOption} value={statusOption}>
-                  {statusOption}
-                </option>
-              ))}
-            </select>
+            <div>
+                <span className={`status status-${app.status}`}>
+                    {app.status}
+                </span>
+            </div>
           </div>
 
           <p>Deadline: {app.deadline || "No deadline"}</p>

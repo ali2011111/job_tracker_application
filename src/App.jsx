@@ -14,24 +14,28 @@ function App() {
     localStorage.setItem("applications", JSON.stringify(applications))
   }, [applications])
 
-  return (
-    <div style={{ padding: "2rem" }}>
+    return (
+  <div className="app-layout">
+
+    <div className="sidebar">
       <h1>Job Tracker</h1>
-
       <Dashboard applications={applications} />
-
-      <ApplicationForm 
-        applications={applications}
-        setApplications={setApplications}
-      />
-
-      <ApplicationList 
-        applications={applications}
-        setApplications={setApplications}
-      />
-
     </div>
-  )
+
+    <div className="main-content">
+      <ApplicationForm
+        applications={applications}
+        setApplications={setApplications}
+      />
+
+      <ApplicationList
+        applications={applications}
+        setApplications={setApplications}
+      />
+    </div>
+
+  </div>
+)
 }
 
 export default App
